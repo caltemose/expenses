@@ -17,14 +17,22 @@ App.Collections.CategoryList = Backbone.Collection.extend({
 		App.trace('CategoryList.addNew() ' + this.models.length);
 		var model = new App.Models.Category({"category": category});
 		var me = this;
-		model.save({},{success:function(model){
-			me.add(model);
-			App.trace('new length: ' + me.models.length);
-			callback(model, ref);
-		}});
-		//model.sync();
-		//this.add(model);
-		//this.sync();
-		//callback();
+		model.save({},{
+			success:function(model){
+				if (!model.get('dupe')) {
+					me.add(model);
+					App.trace('Adding new category: ' + me.models.length);
+					callback({success:true, model: model, me: ref});
+				} else {
+					var existingModel = me.get(model.id);
+					App.trace('Reusing existing category: ' + me.models.length);
+					callback({success:true, model: existingModel, me: ref});
+				}
+			},
+			error:function(e){
+				App.trace("New Category Error: " + e);
+				callback({me: ref});
+			}
+		});
 	}
 });

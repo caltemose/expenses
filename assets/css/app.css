@@ -38,7 +38,24 @@ button, input, select, textarea {
     *vertical-align: middle;
 }
 
+/* 
 
+header + menus
+
+*/
+#menu {
+	display: none;
+	position: absolute;
+	top: 48px;
+	left: 0;
+	width: 100%;
+	background: #eee;
+	padding-bottom: 30em;
+}
+#menu button {
+	width: 90%;
+	margin: 0.3em auto;
+}
 
 
 
@@ -62,9 +79,21 @@ ul.transactions.short li.transaction div.amount {
 	text-align: right;
 }
 
-
-div.transaction-details input, div.transaction-details button {
+div.transaction-details {
+	width: 96%;
+	margin: 0 auto;
+}
+div.transaction-details > div {
+	margin-bottom: 0.5em;
+}
+div.transaction-details input, div.transaction-details button, div.transaction-details textarea {
 	width: 100%;
+}
+div.transaction-details input[type=radio] {
+	width: 1em;
+}
+div.transaction-details span#accounts label {
+	margin: 0 1em 0 0.2em;
 }
 
 

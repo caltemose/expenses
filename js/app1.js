@@ -20,6 +20,7 @@ window.App = {
 		this.accounts = new App.Collections.AccountList();
 		this.categories = new App.Collections.CategoryList();
 		this.transactions = new App.Collections.TransactionList(); 
+		$('#menu').hide();
 		//and start sequentially loading them
 		this.payees.fetch({success:function(){
 			App.accounts.fetch({success:function(){
@@ -30,6 +31,8 @@ window.App = {
 						App.trace(App.payees.toJSON());
 						App.trace(App.transactions.toJSON());
 						
+						App.activateHeader();
+						
 						App.router = new App.Routers.Router();
 						App.router.start();
 						//App.router.navigate("",true);
@@ -37,6 +40,27 @@ window.App = {
 				}});
 			}});
 		}});
+	},
+	activateHeader: function(){
+		var me = this;
+		$('#header a.btn-menu').click(function(){
+			me.toggleMenu();
+		});
+		$('#header a.btn-add').click(function(){
+			me.toggleAddMenu();
+		});
+	},
+	toggleMenu: function(){
+		App.trace('App.toggleMenu()');
+	},
+	toggleAddMenu: function(){
+		App.trace('App.toggleAddMenu()');
+		if ($('#menu').is(":visible") {
+			//empty + hide it
+		} else {
+			//puplate + show it
+			$('#menu').show();
+		}
 	},
 	createTransactionView: function(){
 		App.trace('App.createTransactionView()');
@@ -85,11 +109,21 @@ window.App = {
 		App.router.navigate("",{trigger:true});
 	},
 	
-	getAutocompleteMap: function(){
+	getCategoryAutocompleteMap: function(){
 		var map = [];
 		App.categories.each(function(model){
 			map.push({
 				value: model.get('category'),
+				id: model.get('id')
+			});
+		});
+		return map;
+	},
+	getPayeeAutocompleteMap: function(){
+		var map = [];
+		App.payees.each(function(model){
+			map.push({
+				value: model.get('payee'),
 				id: model.get('id')
 			});
 		});
