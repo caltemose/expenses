@@ -43,6 +43,14 @@ button, input, select, textarea {
 header + menus
 
 */
+.btn-menu, .btn-add {
+	cursor: pointer;
+}
+.btn-menu.dim, .btn-add.dim {
+	opacity: 0.2;
+	cursor: default;
+}
+
 #menu {
 	display: none;
 	position: absolute;

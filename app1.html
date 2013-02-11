@@ -3,26 +3,19 @@
 <head>
 	<meta name="viewport" content="width=device-width"/>
 	<title>Backbone Expenses</title>
-	<link href="assets/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
+	<!-- <link href="assets/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet"> -->
 	<link rel="stylesheet" href="assets/css/app.css" />
 </head>
 <body>
 
-<div id="header">
-	<a href="#" class="btn-menu"><img src="assets/img/btn-menu.png" alt="show menu" width="42" height="42" /></a>
-	<a href="#" class="btn-add"><img src="assets/img/btn-add.png" alt="add transaction" width="42" height="42" /></a>
-</div>
-<div id="app"></div>
-<div id="menu">
-	<button>+ USAA Checking</button>
-	<button>+ USAA Credit</button>
-</div>
+<div id="header"></div>
+<div id="content"></div>
+<div id="menu"></div>
 
 <script src="js/libs/jquery.min.js"></script>
-<script src="js/libs/jquery-ui.custom.min.js"></script>
-<script src="js/libs/underscore-min.js"></script>
+<!-- <script src="js/libs/jquery-ui.custom.min.js"></script> -->
+<script src="js/libs/lodash.js"></script>
 <script src="js/libs/backbone-min.js"></script>
-
 
 <script src="js/app1.js"></script>
 <script src="js/routers/router.js"></script>
@@ -30,9 +23,10 @@
 <script src="js/models/accounts.js"></script>
 <script src="js/models/categories.js"></script>
 <script src="js/models/transactions.js"></script>
-<script src="js/views/transactionShortView.js"></script>
+<script src="js/views/headerView.js"></script>
+<!-- <script src="js/views/transactionShortView.js"></script>
 <script src="js/views/transactionListShortView.js"></script>
-<script src="js/views/transactionDetailsView.js"></script>
+<script src="js/views/transactionDetailsView.js"></script> -->
 
 </body>
 </html>
