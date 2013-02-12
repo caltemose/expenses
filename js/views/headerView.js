@@ -1,12 +1,8 @@
 App.Views.HeaderView = Backbone.View.extend({
-	model: App.Models.Account, // REMOVE THIS!
 	initialize: function(){
-		console.dir(this);
 		//listen to various global event manager events
 		_.bindAll(this, "coreDataLoaded");
-		//App.vent.bind("coreDataLoaded", activate);
-		
-
+		App.vent.bind("coreDataLoaded", this.coreDataLoaded);
 	},
 	render: function(){
 		var html = '<img class="btn-menu dim" src="assets/img/btn-menu.png" alt="show menu" width="42" height="42" />';
@@ -14,10 +10,12 @@ App.Views.HeaderView = Backbone.View.extend({
 		this.$el.html(html);
 	},
 	deactivate: function(){
+		App.trace('HeaderView.deactivate()');
 		this.$el.find('img.btn-menu').addClass("dim").unbind('click');
 		this.$el.find('img.btn-add').addClass("dim").unbind('click');
 	},
 	activate: function(){
+		App.trace('HeaderView.activate()');
 		var mainMenuClick = this.mainMenuClick;
 		var addMenuClick = this.addMenuClick;
 		this.$el.find('img.btn-menu').removeClass("dim").bind('click', mainMenuClick);
@@ -28,5 +26,8 @@ App.Views.HeaderView = Backbone.View.extend({
 	},
 	addMenuClick: function(){
 		App.trace('HeaderView.addMenuClick()');
+	},
+	coreDataLoaded: function(){
+		this.activate();
 	}
 });

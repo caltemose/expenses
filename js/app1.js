@@ -3,32 +3,34 @@ window.App = {
 	Collections: {},
 	Views: {},
 	Routers: {},
-	
+
+	//main router and events
+	router: {},
 	vent: {},
 	
-	router: {},
+	//data
 	payees: {},
 	categories: {},
 	accounts: {},
 	transactions: {},
 	
+	//permanent views
 	headerView: {},
 	//mainView: null,
 	//mainDetailsView: null,
 	
 	init: function(){
 		this.trace('App.init()');
-		$('#app').html('<div class="startup">Starting up...</div>');
+		$('#content').html('<div class="startup">Starting up...</div>');
 		
 		//event manager
-		this.vent = _.extend({}, Backbone.Events);
+		App.vent = _.extend({}, Backbone.Events);
 		
 		//init headerView
 		headerView = new App.Views.HeaderView();
 		headerView.render();
-		$('#header').html(headerView.el);
+		$('#header').append(headerView.el);
 		
-		/*
 		//load core data
 		this.payees = new App.Collections.PayeeList();
 		this.accounts = new App.Collections.AccountList();
@@ -37,11 +39,10 @@ window.App = {
 		this.payees.fetch({success:function(){
 			App.accounts.fetch({success:function(){
 				App.categories.fetch({success:function(){
-					//App.vent.trigger('coreDataLoaded');
+					App.vent.trigger('coreDataLoaded');
 				}});
 			}});
 		}});
-		*/
 
 	},
 	trace: function(msg){
