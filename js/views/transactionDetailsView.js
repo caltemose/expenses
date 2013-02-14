@@ -39,6 +39,7 @@ App.Views.TransactionDetailsView = Backbone.View.extend({
 		this.model.on('change', this.render, this);
 	},
 	render: function(){
+		App.trace(this.model.get('account_id'));
 		var data = this.model.smush(),
 			me = this,
 			categoryMap = App.getCategoryAutocompleteMap(),
@@ -139,22 +140,24 @@ App.Views.TransactionDetailsView = Backbone.View.extend({
 			//account
 		App.trace(data);
 		this.model.set(data);
+		//@TODO add error handling
 		this.model.save({}, {success:function(model){
 			App.trace('TransactionDetailsView model-saved isNew=' + model.isNew());
 			if (model.isNew()) App.transactions.add(model);
-			App.goHome();
+			App.router.navigate("",{trigger:true});
 		}});
 	},
 	cancelTransaction: function(){
 		if (this.model.isNew()) this.model.destroy();
 		App.trace("TransactionDetailsView.cancelTransaction()" + this.model.isNew());
-		App.goHome();
+		App.router.navigate("",{trigger:true});
 	},
 	deleteTransaction: function(){
 		if (this.model.isNew()) this.cancelTransaction();
+		//@TODO add error handling
 		this.model.destroy({success:function(model){
 			App.trace("TransactionDetailsView.deleteTransaction()  --existing model destroyed");
-			App.goHome();
+			App.router.navigate("",{trigger:true});
 		}});
 	}
 });

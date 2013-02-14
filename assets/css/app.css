@@ -60,9 +60,13 @@ header + menus
 	background: #eee;
 	padding-bottom: 30em;
 }
-#menu button {
+#menu > div {
 	width: 90%;
-	margin: 0.3em auto;
+	margin: 0 auto;
+}
+#menu button {
+	width: 100%;
+	margin: 0.3em 0;
 }
 
 

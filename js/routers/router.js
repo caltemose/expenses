@@ -1,7 +1,8 @@
 App.Routers.Router = Backbone.Router.extend({
 	routes: {
 		"": "index",
-		"transaction/:id": "transactionDetails"
+		"transaction/:id": "transactionDetails",
+		"newTransaction/:mode/:value": "transactionDetailsCustom"
 	},
 	initialize: function(options){
 		App.trace("Router.initialize()");
@@ -19,5 +20,9 @@ App.Routers.Router = Backbone.Router.extend({
 		//if (id==="new") App.createNewTransaction();
 		//else App.showTransactionDetails(id);
 		App.vent.trigger('routeTransactionShortView', id);
+	},
+	transactionDetailsCustom: function(mode, value){
+		App.trace("Router.transactionDetailsCustom(" + mode + ', ' + value + ')');
+		App.newTransactionCustom(mode, value);
 	}
 });
