@@ -12,14 +12,12 @@ App.Routers.Router = Backbone.Router.extend({
 	},
 	index: function(){
 		App.trace("Router.index()");
-		//App.createTransactionView();
-	}
-	
-	/*,
+		App.vent.trigger("routeIndex");
+	},
 	transactionDetails: function(id){
 		App.trace("Router.transactionDetails(" + id + ")");
-		if (id==="new") App.createNewTransaction();
-		else App.showTransactionDetails(id);
+		//if (id==="new") App.createNewTransaction();
+		//else App.showTransactionDetails(id);
+		App.vent.trigger('routeTransactionShortView', id);
 	}
-	*/
 });
