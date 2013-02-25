@@ -50,7 +50,8 @@ window.App = {
 		App.vent.bind("routeTransactionShortView", this.routeTransactionShortView);
 		_.bindAll(this, "showAddMenu");
 		App.vent.bind("showAddMenu", this.showAddMenu);
-		_.bindAll(this, "showAddMenu");
+		_.bindAll(this, "showMainMenu");
+		App.vent.bind("showMainMenu", this.showMainMenu);
 		
 		//init headerView
 		headerView = new App.Views.HeaderView();
@@ -113,9 +114,17 @@ window.App = {
 	},
 	newTransactionCustom: function(mode, value){
 		App.trace('App.newTransactionCustom() ' + mode);
+		var transaction;
 		if (mode==="account") {
-			var transaction = new App.Models.Transaction();
+			transaction = new App.Models.Transaction();
 			transaction.set({"account_id": value});
+		} else if (mode==="shortcut") {
+			transaction = new App.Models.Transaction();
+			var shortcut = App.shortcuts[value];
+			transaction.set({"account_id":shortcut.account_id});
+			transaction.set({"payee_id": shortcut.payee_id});
+			transaction.set({"category_id": shortcut.category_id});
+			transaction.set({"item": shortcut.item});
 		}
 		this.destroyMenu();
 		this.destroyMainListView();
@@ -127,12 +136,28 @@ window.App = {
 	 *
 	 */
 	showMainMenu: function(){
-		
+		var makeMenu = true;
+		if (this.menu) {
+			if (this.menu.type === "mainMenu") makeMenu = false;
+			this.destroyMenu();
+		}
+		if (makeMenu) {
+			this.menu = new App.Views.MainMenu();
+			this.menu.render();
+			this.els.$menu.html(this.menu.el).show();
+		}
 	},
 	showAddMenu: function(){
-		this.menu = new App.Views.AddMenu({accounts: this.accounts});
-		this.menu.render();
-		this.els.$menu.html(this.menu.el).show();
+		var makeMenu = true;
+		if (this.menu) {
+			if (this.menu.type === "addMenu") makeMenu = false;
+			this.destroyMenu();
+		}
+		if (makeMenu) {
+			this.menu = new App.Views.AddMenu({accounts: this.accounts});
+			this.menu.render();
+			this.els.$menu.html(this.menu.el).show();
+		}
 	},
 	destroyMenu: function(){
 		if (this.menu) {

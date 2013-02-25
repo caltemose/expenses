@@ -36,7 +36,7 @@ App.Views.TransactionDetailsView = Backbone.View.extend({
 		'click .delete': 'deleteTransaction'
 	},
 	initialize: function(){
-		this.model.on('change', this.render, this);
+		//this.model.on('change', this.render, this);
 	},
 	render: function(){
 		App.trace(this.model.get('account_id'));
@@ -126,24 +126,25 @@ App.Views.TransactionDetailsView = Backbone.View.extend({
 		else alert("Payee Add failed");
 	},
 	saveTransaction: function(){
+		App.trace(this.$el.find('input.category_id').val());
 		var data = {};
 			data.id = this.model.get('id');
-			data.payee_id = this.$el.find('input.payee_id').val();
+			data.payee_id = this.model.get('payee_id'); //this.$el.find('input.payee_id').val();
 			data.payee = this.$el.find('input.payee').val();
 			data.entry_date = this.$el.find('input.date').val();
 			data.amount = this.$el.find('input.amount').val();
 			data.item = this.$el.find('input.item').val();
 			data.notes = this.$el.find('textarea.notes').val();
-			data.category_id = this.$el.find('input.category_id').val();
+			data.category_id = this.model.get('category_id'); //this.$el.find('input.category_id').val();
 			data.category = this.$el.find('input.category').val();
-			data.account_id = this.$el.find('input.account_id').val();
+			data.account_id = this.model.get('account_id'); //this.$el.find('input.account_id').val();
 			//account
-		App.trace(data);
+		var isNew = this.model.isNew();
 		this.model.set(data);
 		//@TODO add error handling
 		this.model.save({}, {success:function(model){
-			App.trace('TransactionDetailsView model-saved isNew=' + model.isNew());
-			if (model.isNew()) App.transactions.add(model);
+			App.trace('TransactionDetailsView model-saved isNew=' + isNew);
+			if (isNew) App.transactions.add(model);
 			App.router.navigate("",{trigger:true});
 		}});
 	},

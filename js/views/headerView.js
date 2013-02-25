@@ -26,7 +26,7 @@ App.Views.HeaderView = Backbone.View.extend({
 		App.vent.trigger('showMainMenu');
 	},
 	addMenuClick: function(){
-		//App.trace('HeaderView.addMenuClick()');
+		App.trace('HeaderView.addMenuClick()');
 		App.vent.trigger('showAddMenu');
 	},
 	coreDataLoaded: function(){
