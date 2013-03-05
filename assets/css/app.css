@@ -87,7 +87,7 @@ button {
 	width: 100%;
 	min-height: 1000px;
 	background: #ddd;
-	padding: 1em;
+	padding-top: 300px;
 	opacity: 0.8;
 }
 
@@ -145,6 +145,13 @@ ul.transactions.short {
 	width: 94%;
 	margin: 0 auto;
 }
+ul.transactions.short li.date {
+	/* background: #e4eef0; */
+	color: #aaa;
+	font-size: 0.8em;
+	margin: 0;
+	padding: 0.2em 0 0 0.8em;
+}
 ul.transactions.short li.transaction {
 	font-size: 1.3em;
 	padding: 0.4em 0.4em 0.1em 0.4em;
@@ -192,7 +199,7 @@ pagination
 
 */
 .pagination {
-	margin: 1em 0;
+	margin: 2em 0;
 	position: relative;
 }
 /* divs: page-button prev, page-button next */

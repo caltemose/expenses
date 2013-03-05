@@ -9,12 +9,12 @@ App.Views.AddMenu = Backbone.View.extend({
 		'click .shortcut': 'handleShortcut'
 	},
 	render: function(){
+		this.$el.empty();
 		this.addAccounts();
 		this.addShortcuts();
 		return this;
 	},
 	addAccounts: function(){
-		this.$el.empty();
 		this.accounts.forEach(this.addAccount, this);
 	},
 	addAccount: function(acct){

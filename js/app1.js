@@ -95,6 +95,7 @@ window.App = {
 			this.transactions.fetch();
 		}
 		if (!this.mainListView) this.createMainListView();
+		this.destroyMenu();
 	},
 	routeTransactionShortView: function(id){
 		if (this.mainListView) this.destroyMainListView();
@@ -204,7 +205,7 @@ window.App = {
 		this.els.$content.html(this.detailsView.el);
 	},
 	loadMsg: function(){
-		var html = '<img src="assets/img/loading.gif" alt="loading" />';
+		var html = '<img class="loading" src="assets/img/loading.gif" alt="loading" />';
 		this.els.$msg.html(html);
 		this.els.$msg.show();
 	},

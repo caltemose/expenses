@@ -26,7 +26,16 @@ App.Views.TransactionListShortView = Backbone.View.extend({
 		this.$el.show();
 	},
 	addAll: function(){
-		this.collection.forEach(this.addOne, this);
+		//this.collection.forEach(this.addOne, this);
+		var i, modl, date, html = "";
+		for(i=0; i<this.collection.length; i++){
+			modl = this.collection.at(i);
+			if(modl.get('entry_date') != date) {
+				this.$el.find('ul').append('<li class="date">' + modl.get('entry_date') + '</li>');
+			}
+			this.addOne(modl);
+			date = modl.get('entry_date');
+		}
 	},
 	addOne: function(item){
 		var me = this;

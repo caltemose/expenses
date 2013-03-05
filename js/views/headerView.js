@@ -22,11 +22,13 @@ App.Views.HeaderView = Backbone.View.extend({
 		this.$el.find('a.btn-menu').removeClass("dim").bind('click', mainMenuClick);
 		this.$el.find('a.btn-add').removeClass("dim").bind('click', addMenuClick);
 	},
-	mainMenuClick: function(){
+	mainMenuClick: function(e){
+		e.preventDefault();
 		App.trace('HeaderView.mainMenuClick()');
 		App.vent.trigger('showMainMenu');
 	},
-	addMenuClick: function(){
+	addMenuClick: function(e){
+		e.preventDefault();
 		App.trace('HeaderView.addMenuClick()');
 		App.vent.trigger('showAddMenu');
 	},
