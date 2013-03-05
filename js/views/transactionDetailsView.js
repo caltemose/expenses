@@ -23,12 +23,12 @@ App.Views.TransactionDetailsView = Backbone.View.extend({
 		'<input type="hidden" id="dt_account_id" class="account_id" value="<%= account_id %>" />' + 
 		'<div><span id="accounts"></span></div>' +
 		
-		'<div><label>Notes</label><br/><textarea class="notes"><%= notes %></textarea></div>' +
+		'<div><label>Notes</label><br/><textarea rows="4" class="notes"><%= notes %></textarea></div>' +
 		
 		'<button class="save">Save</button>' + 
 		//this could/should be hidden if this is a new transaction
-		'<button class="delete">Delete</button>' + 
-		'<button class="cancel">Cancel</button>'
+		'<button class="cancel">Cancel</button>' + 
+		'<button class="delete">Delete</button>'
 	),
 	events: {
 		'click .save': 'saveTransaction',
@@ -45,12 +45,18 @@ App.Views.TransactionDetailsView = Backbone.View.extend({
 			categoryMap = App.getCategoryAutocompleteMap(),
 			payeeMap = App.getPayeeAutocompleteMap(),
 			html = '',
-			i, model;
+			i, modl;
 			
 		this.$el.html(this.template(data));
-		//add accounts radio buttons
+		//add accounts selector
+		html += '<label>account</label><br/>';
+		html += '<select name="account">';
 		for(i=0;i<App.accounts.length;i++){
-			model = App.accounts.at(i);
+			modl = App.accounts.at(i);
+			html += '<option value="' + modl.get('id') + '"';
+			if (modl.get('id') === this.model.get('account_id')) html += ' selected';
+			html += '>' + modl.get("account_name") + '</option>';
+			/*
 			html += '<input type="radio" class="account-radio" name="account" id="account_';
 			html += model.get('id') + '" ';
 			html += 'value="' + model.get('account_name') + '" ';
@@ -58,11 +64,14 @@ App.Views.TransactionDetailsView = Backbone.View.extend({
 			if (model.get('id') === this.model.get('account_id')) html += ' checked ';
 			html += '/>';
 			html += '<label for="account_' + model.get('id') + '">' + model.get('account_name') + '</label>';
+			*/
 		}
+		html += '</select>';
 		this.$el.find('span#accounts').html(html);
-		this.$el.find('input.account-radio').change(function(){
-			me.model.set({account_id: $(this).data('id')}, {silent:true});
-			me.$el.find('input.account_id').val( $(this).data('id') );
+		this.$el.find('select').change(function(){
+			App.trace(me.model.get('account_id') + ',' + $(this).val());
+			me.model.set({account_id: $(this).val()}, {silent:true});
+			me.$el.find('input.account_id').val( $(this).val() );
 		});
 		
 		//hookup category autocomplete fields
@@ -126,6 +135,7 @@ App.Views.TransactionDetailsView = Backbone.View.extend({
 		else alert("Payee Add failed");
 	},
 	saveTransaction: function(){
+		App.loadMsg();
 		App.trace(this.$el.find('input.category_id').val());
 		var data = {};
 			data.id = this.model.get('id');
@@ -140,11 +150,13 @@ App.Views.TransactionDetailsView = Backbone.View.extend({
 			data.account_id = this.model.get('account_id'); //this.$el.find('input.account_id').val();
 			//account
 		var isNew = this.model.isNew();
+		App.trace(this.model.get('account_id'));
 		this.model.set(data);
 		//@TODO add error handling
 		this.model.save({}, {success:function(model){
 			App.trace('TransactionDetailsView model-saved isNew=' + isNew);
 			if (isNew) App.transactions.add(model);
+			App.killMsg();
 			App.router.navigate("",{trigger:true});
 		}});
 	},

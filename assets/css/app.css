@@ -43,22 +43,62 @@ button, input, select, textarea {
 header + menus
 
 */
-.btn-menu, .btn-add {
-	cursor: pointer;
+#header {
+	margin-bottom: 1em;
 }
-.btn-menu.dim, .btn-add.dim {
-	opacity: 0.2;
-	cursor: default;
+#header > div {
+	background: #476a94;
+	padding: 0.6em 0;
+}
+a.btn-menu, a.btn-add {
+	display: block;
+	position: relative;
+	width: 92px;
+	height: 70px;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+a.btn-menu {
+	float: left;
+	background: url('../img/main-sprite.png') no-repeat;
+}
+a.btn-add {
+	float: right;
+	background: url('../img/main-sprite.png') no-repeat;
+	background-position: 0 -71px;
+}
+select {
+	font-size: 1.3em;
+}
+button {
+	margin: 0.5em 0 0.5em;
+	background: #777;
+	color: #fff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+#msg {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 1000px;
+	background: #ddd;
+	padding: 1em;
+	opacity: 0.8;
 }
 
 #menu {
 	display: none;
 	position: absolute;
-	top: 48px;
+	top: 90px;
 	left: 0;
 	width: 100%;
 	background: #eee;
-	padding-bottom: 30em;
+	padding: 1em 0 30em;
 }
 #menu > div {
 	width: 90%;
@@ -67,8 +107,33 @@ header + menus
 #menu button {
 	width: 100%;
 	margin: 0.3em 0;
+	font-size: 1.3em;
+	padding: 0.5em 1em;
+	color: #222;
+}
+#menu button:hover {
+	cursor: pointer;
+}
+#menu button.account {
+	background: #d6d6f3;
+}
+#menu button.shortcut {
+	background: #c5f79d;
 }
 
+button.save {
+	font-size: 1.6em;
+	padding: 1.5em 0.5em;
+	background: #008C00;
+}
+button.cancel {
+	padding: 0.75em 0.5em;
+	background: #A8A800;
+}
+button.delete {
+	padding: 0.5em;
+	background: #B20000;
+}
 
 
 /* 
@@ -76,14 +141,23 @@ header + menus
 main transaction list view
 
 */
+ul.transactions.short {
+	width: 94%;
+	margin: 0 auto;
+}
 ul.transactions.short li.transaction {
-	padding: 0.2em;
-	margin-bottom: 0.3em;
+	font-size: 1.3em;
+	padding: 0.4em 0.4em 0.1em 0.4em;
+	margin-bottom: 0.7em;
 	background-color: #efefef;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
 }
 ul.transactions.short li.transaction div.payee {
 	float: left;
 	width: 75%;
+	font-size: 1.2em;
 }
 ul.transactions.short li.transaction div.amount {
 	float: right;
@@ -99,16 +173,74 @@ div.transaction-details > div {
 	margin-bottom: 0.5em;
 }
 div.transaction-details input, div.transaction-details button, div.transaction-details textarea {
+	font-size: 1.3em;
 	width: 100%;
 }
 div.transaction-details input[type=radio] {
 	width: 1em;
 }
+div.transaction-details label {
+	color: #838383;
+}
 div.transaction-details span#accounts label {
 	margin: 0 1em 0 0.2em;
 }
 
+/*
 
+pagination
+
+*/
+.pagination {
+	margin: 1em 0;
+	position: relative;
+}
+/* divs: page-button prev, page-button next */
+.page-button {
+	background: #476a94;
+	width: 30%;
+	padding: 6px 0;
+	position: relative;
+}
+.page-button:hover {
+	cursor: pointer;
+}
+.page-button.prev {
+	float: left;
+	-webkit-border-top-right-radius: 12px;
+	-webkit-border-bottom-right-radius: 12px;
+	-moz-border-radius-topright: 12px;
+	-moz-border-radius-bottomright: 12px;
+	border-top-right-radius: 12px;
+	border-bottom-right-radius: 12px;
+	padding-right: 1em;
+}
+.page-button.next {
+	float: right;
+	-webkit-border-top-left-radius: 12px;
+	-webkit-border-bottom-left-radius: 12px;
+	-moz-border-radius-topleft: 12px;
+	-moz-border-radius-bottomleft: 12px;
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+	padding-left: 1em;
+}
+.page-button a {
+	display: block;
+	position: relative;
+	width: 80px;
+	height: 75px;
+	background: url('../img/main-sprite.png') no-repeat;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+.page-button a.page-prev {
+	float: right;
+	background-position: 0 -142px;
+}
+.page-button a.page-next {
+	background-position: 0 -217px;
+}
 
 /* 
 
@@ -120,7 +252,6 @@ helper classes
     content: " "; /* 1 */
     display: table; /* 2 */
 }
-
 .cf:after {
     clear: both;
 }

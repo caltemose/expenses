@@ -11,7 +11,8 @@ window.App = {
 	els: {
 		$content: $('#content'),
 		$header: $('#header'),
-		$menu: $('#menu')
+		$menu: $('#menu'),
+		$msg: $('#msg')
 	},
 
 	//main router and events aggregator
@@ -28,7 +29,10 @@ window.App = {
 		//Checking, Cash, ATM
 		{label: "Get Cash", account_id: "1", payee_id: "15", category_id: "1", item: "Cash"},
 		//Credit, Whole Foods, Groceries
-		{label: "Groceries - WF", account_id: "2", payee_id: "16", category_id: "4", item: "Groceries"}
+		{label: "Groceries - WF", account_id: "2", payee_id: "16", category_id: "4", item: "Groceries"},
+		//Checking, Dekalb Farmers Market, Groceries
+		{label: "Groceries - DKFM", account_id: "1", payee_id: "17", category_id: "4", item: "Groceries"}
+		
 	],
 	
 	//stored views
@@ -145,6 +149,7 @@ window.App = {
 			this.menu = new App.Views.MainMenu();
 			this.menu.render();
 			this.els.$menu.html(this.menu.el).show();
+			this.adjustMenu();
 		}
 	},
 	showAddMenu: function(){
@@ -157,6 +162,7 @@ window.App = {
 			this.menu = new App.Views.AddMenu({accounts: this.accounts});
 			this.menu.render();
 			this.els.$menu.html(this.menu.el).show();
+			this.adjustMenu();
 		}
 	},
 	destroyMenu: function(){
@@ -166,6 +172,10 @@ window.App = {
 			this.els.$menu.empty().hide();
 			this.menu = null;
 		}
+	},
+	adjustMenu: function(){
+		var h = $(window).height();
+		this.els.$menu.css('height', h);
 	},
 	/*
 	 *
@@ -192,6 +202,15 @@ window.App = {
 		this.detailsView.render();
 		this.els.$content.empty();
 		this.els.$content.html(this.detailsView.el);
+	},
+	loadMsg: function(){
+		var html = '<img src="assets/img/loading.gif" alt="loading" />';
+		this.els.$msg.html(html);
+		this.els.$msg.show();
+	},
+	killMsg: function(){
+		this.els.$msg.hide();
+		this.els.$msg.empty();
 	},
 	/*
 	 *

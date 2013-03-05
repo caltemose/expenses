@@ -1,0 +1,44 @@
+Alcohol
+Auto - Gas
+Auto - Maintenance
+Auto - Financing
+Checks
+Clothing
+Credit Card Payments
+Dining
+Education
+Electronics
+Entertainment
+Foreign Transaction Fee
+Furniture
+Garden - Organic
+Garden - Tool
+Gifts Given
+Gifts Received
+Groceries
+Home Improvement
+Home Repair
+Home Goods
+Home Taxes and Fees
+Interest Received
+Interest Earned
+Medical Insurance
+Medical Visit
+Miscellaneous Expense
+Miscellaneous Income
+Office Supplies
+Parking - Local
+Parking - Travel
+Personal Care
+Professional Fees
+Shipping
+Software
+Transfer
+Travel - Transportation
+Travel - Dining
+Travel - Lodging
+Travel - Entertainment
+Utilities - Gas
+Utilities - Home Security
+Utilities - Power
+Wireless

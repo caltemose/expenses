@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Untitled</title>
+</head>
+<body>
+
+
+<script>
+var categories = ["Alcohol","Auto - Gas","Auto - Maintenance","Auto - Financing","Checks","Clothing","Credit Card Payments","Dining","Education","Electronics","Entertainment","Foreign Transaction Fee","Furniture","Garden - Organic","Garden - Tool","Gifts Given","Gifts Received","Groceries","Home Improvement","Home Repair","Home Goods","Home Taxes and Fees","Interest Received","Interest Earned","Medical Insurance","Medical Visit","Miscellaneous Expense","Miscellaneous Income","Office Supplies","Parking - Local","Parking - Travel","Personal Care","Professional Fees","Shipping","Software","Transfer","Travel - Transportation","Travel - Dining","Travel - Lodging","Travel - Entertainment","Utilities - Gas","Utilities - Home Security","Utilities - Power","Wireless"];
+
+var payees = ["Ackerman Security","Amazon","Amazon Services","Apple Store","Atkins Park","Atlanta Meter Payments","Bahel","Banana Republic","Bed Bath & Beyond","Best Buy","Boden","BP","Budget Rent-a-car","Cash Account","Chevron","Container Store","Cook's Warehouse","CVS","Dada Hair","Dekalb Farmer's Market","Delta Flight","Delta Onboard","Dreamhost","Empire State South","Firehouse Subs","Fritti","Gap","Georgia Natural Gas","Georgia Power","Green's Liquors","Grindhouse","Holeman and Finch","Home Depot","Home Grown","Ikea","Kroger","La Fondo","Lowe's","Mac's Beer and Wine","Macy's","Marlow's Tavern","Meehan's Pub","Miso Izakaya","NCARB Renewals","Netflix","Office Depot","Overhead Door","Parish Restaurant","Paypal","Peachtree Dermatology","Perrine","Piedmont Hospital","Pike's Nursery","Public","QT","Reagin Optometric","REI","Return to Eden","Sam Flax","Savi","Sevananda","Sotto Sotto","South City Kitchen","Staples","T-Mobile","Target","Texaco","USAA Credit Card","USPS","West Elm","Whole Foods","Wrecking Bar","Zip Car"];
+
+
+var i, html="";
+for(i=0;i<categories.length;i++){
+	html+='(' + i + ', "' + categories[i] + '")';
+	if (i<categories.length-1) html+= ',';
+	else html+=';';
+	html+= "<br/>";
+}
+document.write(html + "<br/><br/>");
+
+for(i=0;i<payees.length;i++){
+	html+='(' + i + ', "' + payees[i] + '", NULL, NULL)';
+	if (i<payees.length-1) html+= ',';
+	else html+=';';
+	html+= "<br/>";
+}
+document.write(html);
+
+</script>
+
+
+
+</body>
+</html>
