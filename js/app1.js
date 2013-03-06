@@ -31,8 +31,13 @@ window.App = {
 		//Credit, Whole Foods, Groceries
 		{label: "Groceries - WF", account_id: "2", payee_id: "16", category_id: "4", item: "Groceries"},
 		//Checking, Dekalb Farmers Market, Groceries
-		{label: "Groceries - DKFM", account_id: "1", payee_id: "17", category_id: "4", item: "Groceries"}
-		
+		{label: "Groceries - DKFM", account_id: "1", payee_id: "17", category_id: "4", item: "Groceries"},
+		//Credit, Lowe's
+		{label: "Lowe's", account_id: "2", payee_id: "37", category_id: "20", item: "Item"},
+		//utils
+		{label: "Gas Bill", account_id: "1", payee_id: "27", category_id: "40", item: "Gas Bill"},
+		{label: "Power Bill", account_id: "1", payee_id: "28", category_id: "42", item: "Power Bill"},
+		{label: "Ackerman", account_id: "2", payee_id: "73", category_id: "41", item: "Security Bill"}
 	],
 	
 	//stored views
@@ -205,7 +210,7 @@ window.App = {
 		this.els.$content.html(this.detailsView.el);
 	},
 	loadMsg: function(){
-		var html = '<img class="loading" src="assets/img/loading.gif" alt="loading" />';
+		var html = '<img class="loading" src="assets/img/loading.gif" alt="loading..." />';
 		this.els.$msg.html(html);
 		this.els.$msg.show();
 	},

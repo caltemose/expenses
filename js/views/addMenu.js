@@ -12,6 +12,7 @@ App.Views.AddMenu = Backbone.View.extend({
 		this.$el.empty();
 		this.addAccounts();
 		this.addShortcuts();
+		App.els.$menu.css('height', $('html').height());
 		return this;
 	},
 	addAccounts: function(){
