@@ -3,20 +3,42 @@ App.Views.TransactionListShortView = Backbone.View.extend({
 	className: 'transactions-container',
 	initialize: function(){
     	this.collection.on('add', this.addOne, this);
-	    this.collection.on('reset', this.addAll, this);
+	    this.collection.on('reset', this.redraw, this);
 	},
 	events: {
-		'click .page-button.prev': 'pagePrev',
-		'click .page-button.next': 'pageNext'
+		//'click .page-button.prev': 'pagePrev',
+		//'click .page-button.next': 'pageNext'
 	},
 	render: function(){
 		this.$el.empty();
 		this.$el.html('<ul class="transactions short"></ul>');
 		this.addAll();
-		var pagination = '<div class="pagination cf"><div class="page-button prev cf"><a href="#" class="page-prev">&laquo;</a></div>';
-		pagination += '<div class="page-button next"><a href="#" class="page-next">&raquo;</a></div></div>';
+		var next = parseInt(this.collection.page)+1, 
+			prev = parseInt(this.collection.page)-1,
+			pp = parseInt(this.collection.perPage),
+			nextLink, prevLink;
+			
+		nextLink = '<a href="app1.html#transactions/p' + next + '/pp' + pp + '" ';
+		nextLink+= 'class="page-next">&raquo;</a>';
+		
+		if (prev>=0) {
+			prevLink = '<a href="app1.html#transactions/p' + prev + '/pp' + pp + '" ';
+			prevLink+= 'class="page-prev">&laquo;</a>';
+		} else
+			prevLink = '<a href="#" class="page-prev dim">&laquo;</a>';
+		
+		var pagination = '<div class="pagination cf">';
+		pagination += '<div class="page-button';
+		if (prev<0) pagination += ' dim ';
+		pagination += ' prev cf">' + prevLink + '</div>';
+		pagination += '<div class="page-button next">' + nextLink + '</div></div>';
 		this.$el.append(pagination);
 		return this;
+	},
+	redraw: function(){
+		App.trace('TransactionListShortView.redraw()');
+		App.trace('page: ' + this.collection.page + ', per_page: ' + this.collection.perPage);
+		this.render();
 	},
 	hide: function(){
 		this.$el.hide();
@@ -52,5 +74,7 @@ App.Views.TransactionListShortView = Backbone.View.extend({
 	pageNext: function(e){
 		e.preventDefault();
 		App.trace('pageNext');
+		var path = '/transactions/p' + (this.collection.page+1) + "/pp" + this.collection.perPage;
+		App.router.navigate(path,{trigger:true});
 	}
 });

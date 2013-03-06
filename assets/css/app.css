@@ -253,6 +253,9 @@ pagination
 .page-button a.page-next {
 	background-position: 0 -217px;
 }
+.page-button.dim {
+	opacity: 0.4;
+}
 
 /* 
 

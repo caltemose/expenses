@@ -15,6 +15,10 @@ window.App = {
 		$msg: $('#msg')
 	},
 
+	userPrefs: {
+		perPage: 4
+	},
+	
 	//main router and events aggregator
 	router: {},
 	vent: {},
@@ -93,11 +97,24 @@ window.App = {
 	 *  routing functions
 	 *
 	 */
-	routeIndex: function(){
+	routeIndex: function(page, perPage){
 		if (!this.transactions){
 			//load recent transactions
 			this.transactions = new App.Collections.TransactionList();
-			this.transactions.fetch();
+			this.transactions.page = page;
+			this.transactions.perPage = perPage;
+			this.transactions.fetch({data:{page:page,per_page:perPage}});
+		} else {
+			//handle when transactions are loaded and need to be reloaded
+			//by comparing arguments to collection props
+			if (page === this.transactions.page) {
+				console.log('same page');
+			} else {
+				console.log('different page');
+				this.transactions.page = page;
+				this.transactions.perPage = perPage;
+				this.transactions.fetch({data:{page:page,per_page:perPage}});
+			}
 		}
 		if (!this.mainListView) this.createMainListView();
 		this.destroyMenu();

@@ -23,12 +23,20 @@ App.Collections.TransactionList = Backbone.Collection.extend({
 	url: '/api/transactions',
 	model: App.Models.Transaction,
 	
+	page: 0,
+	perPage: App.userPrefs.perPage,
+	
 	initialize: function() {
 		App.trace('TransactionList.initialize()');
 		this.on('reset', this.resetStatus, this);
 	},
 	resetStatus: function(){
 		App.trace('TransactionList.resetStatus()');
-	}
-	
+	}/*,
+	fetch: function(options) {
+		options || (options = {});
+		var data = (options.data || {});
+		options.data = {page: this.page, per_page: this.perPage};
+		return Backbone.Collection.prototype.fetch.call(this, options);
+	}*/
 });

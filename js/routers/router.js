@@ -1,6 +1,7 @@
 App.Routers.Router = Backbone.Router.extend({
 	routes: {
 		"": "index",
+		"transactions/p:page/pp:perPage": "indexPagination",
 		"transaction/:id": "transactionDetails",
 		"newTransaction/:mode/:value": "transactionDetailsCustom"
 	},
@@ -13,7 +14,10 @@ App.Routers.Router = Backbone.Router.extend({
 	},
 	index: function(){
 		App.trace("Router.index()");
-		App.vent.trigger("routeIndex");
+		App.vent.trigger("routeIndex", 0, App.userPrefs.perPage);
+	},
+	indexPagination: function(page, perPage){
+		App.vent.trigger("routeIndex", page, perPage);
 	},
 	transactionDetails: function(id){
 		App.trace("Router.transactionDetails(" + id + ")");
