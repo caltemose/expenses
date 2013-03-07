@@ -16,7 +16,7 @@ window.App = {
 	},
 
 	userPrefs: {
-		perPage: 4
+		perPage: 30
 	},
 	
 	//main router and events aggregator
@@ -170,7 +170,7 @@ window.App = {
 		if (makeMenu) {
 			this.menu = new App.Views.MainMenu();
 			this.menu.render();
-			this.els.$menu.html(this.menu.el).show();
+			this.els.$menu.html(this.menu.el).fadeIn(100);//.show();
 			this.adjustMenu();
 		}
 	},
@@ -183,7 +183,7 @@ window.App = {
 		if (makeMenu) {
 			this.menu = new App.Views.AddMenu({accounts: this.accounts});
 			this.menu.render();
-			this.els.$menu.html(this.menu.el).show();
+			this.els.$menu.html(this.menu.el).fadeIn(100);//.show();
 			this.adjustMenu();
 		}
 	},
