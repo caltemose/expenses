@@ -90,8 +90,8 @@ button {
 	opacity: 0.8;
 }
 #msg img.loading {
-	margin-top: 450px;
-	margin-left: 70px;
+	/*margin-top: 450px;*/
+	margin: 0 auto;
 }
 
 #menu {

@@ -31,14 +31,15 @@ window.App = {
 	
 	shortcuts: [
 		//Checking, Cash, ATM
-		{label: "Get Cash", account_id: "1", payee_id: "15", category_id: "1", item: "Cash"},
+		{label: "Get Cash", account_id: "1", payee_id: "13", category_id: "46", item: "Cash"},
 		//Credit, Whole Foods, Groceries
-		{label: "Groceries - WF", account_id: "2", payee_id: "16", category_id: "4", item: "Groceries"},
+		{label: "Groceries - WF", account_id: "2", payee_id: "70", category_id: "17", item: "Groceries"},
 		//Checking, Dekalb Farmers Market, Groceries
-		{label: "Groceries - DKFM", account_id: "1", payee_id: "17", category_id: "4", item: "Groceries"},
+		{label: "Groceries - DKFM", account_id: "1", payee_id: "19", category_id: "17", item: "Groceries"},
 		//Credit, Lowe's
 		{label: "Lowe's", account_id: "2", payee_id: "37", category_id: "20", item: "Item"},
-		//utils
+		//monthly
+		{label: "USAA Insurance", account_id: "1", payee_id: "75", category_id: "45", item: "Home and Auto Insurance"},
 		{label: "Gas Bill", account_id: "1", payee_id: "27", category_id: "40", item: "Gas Bill"},
 		{label: "Power Bill", account_id: "1", payee_id: "28", category_id: "42", item: "Power Bill"},
 		{label: "Ackerman", account_id: "2", payee_id: "73", category_id: "41", item: "Security Bill"}
@@ -99,6 +100,7 @@ window.App = {
 	 */
 	routeIndex: function(page, perPage){
 		if (!this.transactions){
+			console.log('index page');
 			//load recent transactions
 			this.transactions = new App.Collections.TransactionList();
 			this.transactions.page = page;
@@ -107,14 +109,11 @@ window.App = {
 		} else {
 			//handle when transactions are loaded and need to be reloaded
 			//by comparing arguments to collection props
-			if (page === this.transactions.page) {
-				console.log('same page');
-			} else {
-				console.log('different page');
-				this.transactions.page = page;
-				this.transactions.perPage = perPage;
-				this.transactions.fetch({data:{page:page,per_page:perPage}});
-			}
+			if (page === this.transactions.page) console.log('same page');
+			else console.log('different page');
+			this.transactions.page = page;
+			this.transactions.perPage = perPage;
+			this.transactions.fetch({data:{page:page,per_page:perPage}});
 		}
 		if (!this.mainListView) this.createMainListView();
 		this.destroyMenu();
@@ -230,6 +229,7 @@ window.App = {
 		var html = '<img class="loading" src="assets/img/loading.gif" alt="loading..." />';
 		this.els.$msg.html(html);
 		this.els.$msg.show();
+		this.els.$msg.find('img.loading').center();
 	},
 	killMsg: function(){
 		this.els.$msg.hide();

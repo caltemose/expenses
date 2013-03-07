@@ -25,6 +25,15 @@ App.Collections.TransactionList = Backbone.Collection.extend({
 	
 	page: 0,
 	perPage: App.userPrefs.perPage,
+	total: 0,
+	
+	comparator: function(trans1, trans2){
+		return trans1.get('entry_date') < trans2.get('entry_date');
+	},
+	parse: function(response){
+		this.total = response.total;
+		return response.transactions; 
+	},
 	
 	initialize: function() {
 		App.trace('TransactionList.initialize()');

@@ -16,22 +16,30 @@ App.Views.TransactionListShortView = Backbone.View.extend({
 		var next = parseInt(this.collection.page)+1, 
 			prev = parseInt(this.collection.page)-1,
 			pp = parseInt(this.collection.perPage),
+			total = parseInt(this.collection.total),
+			totalPages = Math.ceil(total/pp),
 			nextLink, prevLink;
-			
-		nextLink = '<a href="app1.html#transactions/p' + next + '/pp' + pp + '" ';
-		nextLink+= 'class="page-next">&raquo;</a>';
 		
+		//@TODO clean this up including making the entire button active instead of the <a>
 		if (prev>=0) {
 			prevLink = '<a href="app1.html#transactions/p' + prev + '/pp' + pp + '" ';
 			prevLink+= 'class="page-prev">&laquo;</a>';
 		} else
-			prevLink = '<a href="#" class="page-prev dim">&laquo;</a>';
+			prevLink = '<a class="page-prev dim">&laquo;</a>';
+		
+		if (totalPages > next) {
+			nextLink = '<a href="app1.html#transactions/p' + next + '/pp' + pp + '" ';
+			nextLink+= 'class="page-next">&raquo;</a>';
+		} else
+			nextLink = '<a class="page-next dim">&raquo;</a>';
 		
 		var pagination = '<div class="pagination cf">';
-		pagination += '<div class="page-button';
+		pagination += '<div class="page-button prev';
 		if (prev<0) pagination += ' dim ';
 		pagination += ' prev cf">' + prevLink + '</div>';
-		pagination += '<div class="page-button next">' + nextLink + '</div></div>';
+		pagination += '<div class="page-button next';
+		if (totalPages <= next) pagination += ' dim ';
+		pagination += '">' + nextLink + '</div></div>';
 		this.$el.append(pagination);
 		return this;
 	},

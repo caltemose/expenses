@@ -136,7 +136,7 @@ App.Views.TransactionDetailsView = Backbone.View.extend({
 	},
 	saveTransaction: function(){
 		App.loadMsg();
-		App.trace(this.$el.find('input.category_id').val());
+		//App.trace(this.$el.find('input.category_id').val());
 		var data = {};
 			data.id = this.model.get('id');
 			data.payee_id = this.model.get('payee_id'); //this.$el.find('input.payee_id').val();
@@ -150,7 +150,7 @@ App.Views.TransactionDetailsView = Backbone.View.extend({
 			data.account_id = this.model.get('account_id'); //this.$el.find('input.account_id').val();
 			//account
 		var isNew = this.model.isNew();
-		App.trace(this.model.get('account_id'));
+		//App.trace(this.model.get('account_id'));
 		this.model.set(data);
 		//@TODO add error handling
 		this.model.save({}, {success:function(model){
